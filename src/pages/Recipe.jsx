@@ -32,7 +32,7 @@ function Recipe() {
   }
 
   return (
-    <div className="max-w-[960px] mx-auto px-20 pb-20">
+    <div className="max-w-[960px] mx-auto px-10 pb-20">
       <RecipeDetail
         title={recipe.title}
         imageUrl={recipe.image}

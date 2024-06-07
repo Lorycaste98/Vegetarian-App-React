@@ -20,10 +20,10 @@ function RecipeDetail({ title, imageUrl, ingredients, detailsSummary, detailsIns
         <div className="w-full md:w-1/2 overflow-hidden  relative">
           <img src={imageUrl} alt={title} className="w-full h-full object-cover scale-125" />
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/80 to-transparent">
-            <h1 className="uppercase font-bold text-xl text-white text-center">{title}</h1>
+            <h1 className="uppercase font-bold text-sm md:text-xl text-white text-center mx-4">{title}</h1>
           </div>
         </div>
-        <div className="w-full md:w-1/2 flex flex-col p-8">
+        <div className="w-full md:w-1/2 flex flex-col p-8 text-xs md:text-base">
           <p dangerouslySetInnerHTML={{ __html: detailsSummary }}></p>
         </div>
       </div>
@@ -31,7 +31,7 @@ function RecipeDetail({ title, imageUrl, ingredients, detailsSummary, detailsIns
         <div>
           <button
             onClick={handleShowIngredients}
-            className={`py-2 px-4 border-4 border-[#009800] rounded-xl font-bold transition duration-300 mr-3 ${
+            className={`py-2 px-4 border-4 border-[#009800] rounded-xl font-bold text-sm text md:text-base transition duration-300 mr-3 mb-3 ${
               showIngredients ? 'bg-[#009800] text-white' : 'text-[#009800] hover:bg-[#009800] hover:text-white'
             }`}
           >
@@ -39,7 +39,7 @@ function RecipeDetail({ title, imageUrl, ingredients, detailsSummary, detailsIns
           </button>
           <button
             onClick={handleShowRecipe}
-            className={`py-2 px-4 border-4 border-[#009800] rounded-xl font-bold transition duration-300 ${
+            className={`py-2 px-4 border-4 border-[#009800] rounded-xl font-bold text-sm text md:text-base transition duration-300 ${
               showInstructions ? 'bg-[#009800] text-white' : 'text-[#009800] hover:bg-[#009800] hover:text-white'
             }`}
           >
@@ -49,10 +49,12 @@ function RecipeDetail({ title, imageUrl, ingredients, detailsSummary, detailsIns
         <div>
           {showIngredients && ingredients && Array.isArray(ingredients) && (
             <div className="my-4">
-              <h2 className="text-lg font-semibold mb-2">INGREDIENTI</h2>
+              <h2 className="text-md md:text-lg font-semibold mb-2">INGREDIENTI</h2>
               <ul className="list-disc list-inside">
                 {ingredients.map((ingredient) => (
-                  <li key={ingredient.id}>{ingredient.original}</li>
+                  <li key={ingredient.id} className="text-xs md:text-base">
+                    {ingredient.original}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -60,7 +62,7 @@ function RecipeDetail({ title, imageUrl, ingredients, detailsSummary, detailsIns
           {showInstructions && (
             <div className="my-4">
               <h2 className="text-lg font-semibold mb-2">RICETTA</h2>
-              <p dangerouslySetInnerHTML={{ __html: detailsInstructions }}></p>
+              <p dangerouslySetInnerHTML={{ __html: detailsInstructions }} className="text-xs md:text-base"></p>
             </div>
           )}
         </div>

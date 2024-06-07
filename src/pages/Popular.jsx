@@ -41,7 +41,7 @@ function Popular() {
   }
 
   return (
-    <div className="max-w-[1024px] mx-auto px-20">
+    <div className="max-w-[1024px] mx-auto px-10 ">
       <h1 className="text-[#ededed] font-bold text-2xl my-10">Ricette popolari</h1>
       <div className="grid grid-cols-1 lg:grid-cols-1 gap-10 ">
         {recipes.map((recipe) => (
