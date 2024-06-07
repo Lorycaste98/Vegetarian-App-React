@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import Card from './Card';
+import Card from '../components/Card';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import { RecipeApiContext } from '../stores/RecipeApiContext';
 
@@ -15,7 +15,7 @@ function Popular() {
     };
 
     fetchData();
-  }, [offset]);
+  }, [offset, getHomepageRecipes]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useCallback, useState } from 'react';
 import axios from 'axios';
 
 export const RecipeApiContext = createContext({});
@@ -8,20 +8,7 @@ export const RecipeApiProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const baseURL = 'https://api.spoonacular.com/recipes/';
 
-  const fetchRecipes = async (url) => {
-    setLoading(true); // Imposta lo stato di caricamento su true prima di effettuare la richiesta
-    try {
-      const response = await axios.get(url);
-      setLoading(false); // Imposta lo stato di caricamento su false dopo aver ricevuto la risposta
-      return response.data;
-    } catch (err) {
-      setError(handleError(err));
-      setLoading(false); // Imposta lo stato di caricamento su false in caso di errore
-      return null;
-    }
-  };
-
-  const handleError = (err) => {
+  const handleError = useCallback((err) => {
     if (err.response) {
       switch (err.response.status) {
         case 401:
@@ -36,22 +23,47 @@ export const RecipeApiProvider = ({ children }) => {
     } else {
       return `Errore nell'impostazione della richiesta`;
     }
-  };
+  }, []);
 
-  const getHomepageRecipes = async (offset = 0) => {
-    const url = `${baseURL}complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=vegetarian&number=10&offset=${offset}`;
-    return await fetchRecipes(url);
-  };
+  const fetchRecipes = useCallback(
+    async (url) => {
+      setLoading(true);
+      try {
+        const response = await axios.get(url);
+        setLoading(false);
+        return response.data;
+      } catch (err) {
+        setError(handleError(err));
+        setLoading(false);
+        return null;
+      }
+    },
+    [handleError]
+  );
 
-  const searchByIngredient = async (name, offset = 0) => {
-    const url = `${baseURL}complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=vegetarian&number=10&query=${name}&offset=${offset}`;
-    return await fetchRecipes(url);
-  };
+  const getHomepageRecipes = useCallback(
+    async (offset = 0) => {
+      const url = `${baseURL}complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=vegetarian&number=10&offset=${offset}`;
+      return await fetchRecipes(url);
+    },
+    [fetchRecipes]
+  );
 
-  const getRecipeDetails = async (id) => {
-    const url = `${baseURL}${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`;
-    return await fetchRecipes(url);
-  };
+  const searchByIngredient = useCallback(
+    async (name, offset = 0) => {
+      const url = `${baseURL}complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=vegetarian&number=10&query=${name}&offset=${offset}`;
+      return await fetchRecipes(url);
+    },
+    [fetchRecipes]
+  );
+
+  const getRecipeDetails = useCallback(
+    async (id) => {
+      const url = `${baseURL}${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`;
+      return await fetchRecipes(url);
+    },
+    [fetchRecipes]
+  );
 
   return (
     <RecipeApiContext.Provider

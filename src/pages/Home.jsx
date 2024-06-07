@@ -1,4 +1,4 @@
-import Popular from '../components/Popular';
+import Popular from '../pages/Popular';
 
 import React from 'react';
 import SearchBar from '../components/SearchBar';

@@ -16,7 +16,7 @@ function Recipe() {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, getRecipeDetails]);
 
   if (error) {
     return <div className="text-red-700 font-bold text-2xl flex justify-center my-20">Errore: {error}</div>;

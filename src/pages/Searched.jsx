@@ -18,7 +18,7 @@ function Searched() {
     };
 
     fetchData();
-  }, [search, offset]);
+  }, [search, offset, searchByIngredient]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
