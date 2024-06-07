@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+input::placeholder {
+  color: black;
+}
+
+ol {
+  counter-reset: item;
+  padding-left: 30px;
+}
+ol li {
+  counter-increment: item;
+  position: relative;
+}
+ol li::before {
+  content: counter(item) '. '; /* Mostra il numero del contatore seguito da un punto */
+  position: absolute;
+  left: -30px;
+  font-weight: bold;
+}
