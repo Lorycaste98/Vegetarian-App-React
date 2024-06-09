@@ -4,7 +4,7 @@
 
 This application is one of the projects for the Master in Full Stack Development for [start2impact](https://www.start2impact.it/) UNIVERSITY.
 
-Link application : <a href="https://lorycaste98.github.io/javascript-advanced/" target="_blank">Hacker News</a>
+Link application : <a href="https://vegetaflavors.netlify.app/" target="_blank">VegetaFlavors</a>
 
 ### The assignment:
 
